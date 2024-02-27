@@ -21,7 +21,7 @@ function addManager() {
         {
             type: 'input',
             name: 'name',
-            message: 'Enter team managers name.',
+            message: 'Enter team managers name:',
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -34,7 +34,7 @@ function addManager() {
         {
             type: 'input',
             name: 'id',
-            message: 'Enter manager ID.',
+            message: 'Enter manager ID:',
             validate: idInput => {
                 if (idInput) {
                     return true;
@@ -47,7 +47,7 @@ function addManager() {
         {
             type: 'input',
             name: 'email',
-            message: 'Enter managers email address.',
+            message: 'Enter managers email address:',
             validate: emailInput => {
                 if (emailInput) {
                     return true;
@@ -60,7 +60,7 @@ function addManager() {
         {
             type: 'input',
             name: 'officeNumber',
-            message: 'Enter managers office number',
+            message: 'Enter managers office number:',
             validate: officeInput => {
                 if (officeInput) {
                     return true;
@@ -112,7 +112,7 @@ function addEngineer() {
         {
             type: 'input',
             name: 'name',
-            message: 'Enter engineers name',
+            message: 'Enter engineers name: ',
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -125,7 +125,7 @@ function addEngineer() {
         {
             type: 'input',
             name: 'id',
-            message: 'Enter engineers ID',
+            message: 'Enter engineers ID: ',
             validate: idInput => {
                 if (idInput) {
                     return true;
@@ -138,7 +138,7 @@ function addEngineer() {
         {
             type: 'input',
             name: 'email',
-            message: 'Enter engineers email',
+            message: 'Enter engineers email: ',
             validate: emailInput => {
                 if (emailInput) {
                     return true;
@@ -151,7 +151,7 @@ function addEngineer() {
         {
             type: 'input',
             name: 'github',
-            message: 'Enter engineers Github username',
+            message: 'Enter engineers Github username: ',
             validate: githubInput => {
                 if (githubInput) {
                     return true;
@@ -165,8 +165,6 @@ function addEngineer() {
     .then((data) => {
         const engineer = new Engineer(data.name, data.id, data.email, data.github);
         teamMembers.push(engineer);
-        console.log(teamMembers);
-
         addTeamMember();
     })
 }
@@ -177,7 +175,7 @@ function addIntern() {
         {
             type: 'input',
             name: 'name',
-            message: 'Enter interns name',
+            message: 'Enter interns name: ',
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -190,7 +188,7 @@ function addIntern() {
         {
             type: 'input',
             name: 'id',
-            message: 'Enter interns ID',
+            message: 'Enter interns ID: ',
             validate: idInput => {
                 if (idInput) {
                     return true;
@@ -203,7 +201,7 @@ function addIntern() {
         {
             type: 'input',
             name: 'email',
-            message: 'Enter interns email',
+            message: 'Enter interns email: ',
             validate: emailInput => {
                 if (emailInput) {
                     return true;
@@ -216,7 +214,7 @@ function addIntern() {
         {
             type: 'input',
             name: 'school',
-            message: 'Enter interns school',
+            message: 'Enter interns school: ',
             validate: schoolInput => {
                 if (schoolInput) {
                     return true;
@@ -230,18 +228,8 @@ function addIntern() {
     .then((data) => {
         const intern = new Intern(data.name, data.id, data.email, data.school);
         teamMembers.push(intern);
-        console.log(teamMembers);
-
         addTeamMember();
     })
 }
 
 addManager();
-
-// render = teamMembers => {
-//     fs.writeFile(outputPath, render(teamMembers), err => {
-//         if (err){
-//             console.log(err);
-//         }
-//     });
-// };
