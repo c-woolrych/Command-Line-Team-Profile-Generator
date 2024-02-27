@@ -96,7 +96,138 @@ function addTeamMember() {
                 addIntern();
                 break;
             case 'Finish building the team':
-                render(team)
+                renderProfile(team)
         }
     })
+}
+
+function addEngineer() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter engineers name',
+            validate: nameInput => {
+                if (nameInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Enter engineers ID',
+            validate: idInput => {
+                if (idInput !== "number") {
+                console.log("Expected parameter 'ID' to be a number");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Enter engineers email',
+            validate: emailInput => {
+                if (emailInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'Enter engineers Github username',
+            validate: githubInput => {
+                if (githubInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        }
+    ])
+    .then((data) => {
+        const engineer = new Engineer(data.name, data.id, data.email, data.github);
+        team.push(engineer);
+        addTeamMember();
+    })
+}
+
+function addIntern() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter interns name',
+            validate: nameInput => {
+                if (nameInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Enter interns ID',
+            validate: idInput => {
+                if (idInput !== "number") {
+                console.log("Expected parameter 'ID' to be a number");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Enter interns email',
+            validate: emailInput => {
+                if (emailInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'Enter interns school',
+            validate: githubInput => {
+                if (githubInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        }
+    ])
+    .then((data) => {
+        const intern = new Engineer(data.name, data.id, data.email, data.school);
+        team.push(intern);
+        addTeamMember();
+    })
+}
+
+addManager();
+function renderProfile(team) {
+    fs.writeFile(outputPath, render(team))
 }
