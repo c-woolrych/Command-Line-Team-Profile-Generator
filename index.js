@@ -87,4 +87,16 @@ function addTeamMember() {
             choices: ['Add an engineer', 'Add an intern', 'Finish building the team']
         }
     ])
+    .then(role => {
+        switch (role.choice) {
+            case 'Add an engineer':
+                addEngineer();
+                break;
+            case 'Add an intern':
+                addIntern();
+                break;
+            case 'Finish building the team':
+                render(team)
+        }
+    })
 }
