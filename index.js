@@ -52,7 +52,7 @@ function addManager() {
                 if (emailInput) {
                     return true;
                 } else {
-                    console.log("Expected parameter 'name' to be a non-empty string");
+                    console.log("Expected parameter 'email' to be a non-empty string");
                     return false;
                 };
             }
@@ -65,7 +65,7 @@ function addManager() {
                 if (officeInput) {
                     return true;
                 } else {
-                    console.log("Expected parameter 'name' to be a number");
+                    console.log("Expected parameter 'office number' to be a number");
                     return false;
                 };
             }
@@ -97,7 +97,11 @@ function addTeamMember() {
                 addIntern();
                 break;
             case 'Finish building the team':
-                renderProfile();
+                fs.writeFile(outputPath, render(teamMembers), err => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
         }
     })
 }
@@ -139,7 +143,7 @@ function addEngineer() {
                 if (emailInput) {
                     return true;
                 } else {
-                    console.log("Expected parameter 'name' to be a non-empty string");
+                    console.log("Expected parameter 'email' to be a non-empty string");
                         return false;
                 };
             }
@@ -152,7 +156,7 @@ function addEngineer() {
                 if (githubInput) {
                     return true;
                 } else {
-                    console.log("Expected parameter 'name' to be a non-empty string");
+                    console.log("Expected parameter 'github' to be a non-empty string");
                         return false;
                 };
             }
@@ -204,7 +208,7 @@ function addIntern() {
                 if (emailInput) {
                     return true;
                 } else {
-                    console.log("Expected parameter 'name' to be a non-empty string");
+                    console.log("Expected parameter 'email' to be a non-empty string");
                         return false;
                 };
             }
@@ -217,7 +221,7 @@ function addIntern() {
                 if (schoolInput) {
                     return true;
                 } else {
-                    console.log("Expected parameter 'name' to be a non-empty string");
+                    console.log("Expected parameter 'school' to be a non-empty string");
                         return false;
                 };
             }
@@ -234,6 +238,10 @@ function addIntern() {
 
 addManager();
 
-function renderProfile(teamMembers) {
-    fs.writeFile(outputPath, render(teamMembers))
-};
+// render = teamMembers => {
+//     fs.writeFile(outputPath, render(teamMembers), err => {
+//         if (err){
+//             console.log(err);
+//         }
+//     });
+// };
