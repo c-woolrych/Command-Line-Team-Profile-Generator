@@ -13,7 +13,7 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
-const team = [];
+const teamMembers = [];
 
 function addManager() {
     inquirer
@@ -23,11 +23,11 @@ function addManager() {
             name: 'name',
             message: 'Enter team managers name.',
             validate: nameInput => {
-                if (nameInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (nameInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
                 };
             }
         },
@@ -36,11 +36,11 @@ function addManager() {
             name: 'id',
             message: 'Enter manager ID.',
             validate: idInput => {
-                if (idInput !== "number") {
-                console.log("Expected parameter 'ID' to be a number");
-                    return false;
-                } else {
+                if (idInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'ID' to be a number");
+                    return false;
                 };
             }
         },
@@ -49,11 +49,11 @@ function addManager() {
             name: 'email',
             message: 'Enter managers email address.',
             validate: emailInput => {
-                if (emailInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (emailInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
                 };
             }
         },
@@ -62,18 +62,18 @@ function addManager() {
             name: 'officeNumber',
             message: 'Enter managers office number',
             validate: officeInput => {
-                if (officeInput !== "number") {
-                console.log("Expected parameter 'name' to be a number");
-                    return false;
-                } else {
+                if (officeInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a number");
+                    return false;
                 };
             }
         }
     ])
     .then((data) => {
         const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-        team.push(manager);
+        teamMembers.push(manager);
         addTeamMember();
     })
 }
@@ -83,12 +83,13 @@ function addTeamMember() {
     .prompt([
         {
             type: 'list',
-            name: 'role',
+            name: 'menu',
+            message: 'Would you like to...',
             choices: ['Add an engineer', 'Add an intern', 'Finish building the team']
         }
     ])
-    .then(role => {
-        switch (role.choice) {
+    .then(choice => {
+        switch (choice.menu) {
             case 'Add an engineer':
                 addEngineer();
                 break;
@@ -96,7 +97,7 @@ function addTeamMember() {
                 addIntern();
                 break;
             case 'Finish building the team':
-                renderProfile(team)
+                renderProfile();
         }
     })
 }
@@ -109,11 +110,11 @@ function addEngineer() {
             name: 'name',
             message: 'Enter engineers name',
             validate: nameInput => {
-                if (nameInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (nameInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                        return false;
                 };
             }
         },
@@ -122,11 +123,11 @@ function addEngineer() {
             name: 'id',
             message: 'Enter engineers ID',
             validate: idInput => {
-                if (idInput !== "number") {
-                console.log("Expected parameter 'ID' to be a number");
-                    return false;
-                } else {
+                if (idInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'ID' to be a number");
+                        return false;
                 };
             }
         },
@@ -135,11 +136,11 @@ function addEngineer() {
             name: 'email',
             message: 'Enter engineers email',
             validate: emailInput => {
-                if (emailInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (emailInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                        return false;
                 };
             }
         },
@@ -148,18 +149,20 @@ function addEngineer() {
             name: 'github',
             message: 'Enter engineers Github username',
             validate: githubInput => {
-                if (githubInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (githubInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                        return false;
                 };
             }
         }
     ])
     .then((data) => {
         const engineer = new Engineer(data.name, data.id, data.email, data.github);
-        team.push(engineer);
+        teamMembers.push(engineer);
+        console.log(teamMembers);
+
         addTeamMember();
     })
 }
@@ -172,11 +175,11 @@ function addIntern() {
             name: 'name',
             message: 'Enter interns name',
             validate: nameInput => {
-                if (nameInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (nameInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                        return false;
                 };
             }
         },
@@ -185,11 +188,11 @@ function addIntern() {
             name: 'id',
             message: 'Enter interns ID',
             validate: idInput => {
-                if (idInput !== "number") {
-                console.log("Expected parameter 'ID' to be a number");
-                    return false;
-                } else {
+                if (idInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'ID' to be a number");
+                        return false;
                 };
             }
         },
@@ -198,36 +201,39 @@ function addIntern() {
             name: 'email',
             message: 'Enter interns email',
             validate: emailInput => {
-                if (emailInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+                if (emailInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                        return false;
                 };
             }
         },
         {
             type: 'input',
-            name: 'github',
+            name: 'school',
             message: 'Enter interns school',
-            validate: githubInput => {
-                if (githubInput !== "string") {
-                console.log("Expected parameter 'name' to be a non-empty string");
-                    return false;
-                } else {
+            validate: schoolInput => {
+                if (schoolInput) {
                     return true;
+                } else {
+                    console.log("Expected parameter 'name' to be a non-empty string");
+                        return false;
                 };
             }
         }
     ])
     .then((data) => {
-        const intern = new Engineer(data.name, data.id, data.email, data.school);
-        team.push(intern);
+        const intern = new Intern(data.name, data.id, data.email, data.school);
+        teamMembers.push(intern);
+        console.log(teamMembers);
+
         addTeamMember();
     })
 }
 
 addManager();
-function renderProfile(team) {
-    fs.writeFile(outputPath, render(team))
-}
+
+function renderProfile(teamMembers) {
+    fs.writeFile(outputPath, render(teamMembers))
+};
