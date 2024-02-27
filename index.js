@@ -20,7 +20,7 @@ function addManager() {
     .prompt([
         {
             type: 'input',
-            name: 'managerName',
+            name: 'name',
             message: 'Enter team managers name.',
             validate: nameInput => {
                 if (nameInput !== "string") {
@@ -33,7 +33,7 @@ function addManager() {
         },
         {
             type: 'input',
-            name: 'managerId',
+            name: 'id',
             message: 'Enter manager ID.',
             validate: idInput => {
                 if (idInput !== "number") {
@@ -46,13 +46,45 @@ function addManager() {
         },
         {
             type: 'input',
-            name: 'managerEmail',
-            message: 'Enter managers email address.'
+            name: 'email',
+            message: 'Enter managers email address.',
+            validate: emailInput => {
+                if (emailInput !== "string") {
+                console.log("Expected parameter 'name' to be a non-empty string");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
         },
         {
             type: 'input',
-            name: 'managerOfficeNumber',
-            message: 'Enter managers office number'
+            name: 'officeNumber',
+            message: 'Enter managers office number',
+            validate: officeInput => {
+                if (officeInput !== "number") {
+                console.log("Expected parameter 'name' to be a number");
+                    return false;
+                } else {
+                    return true;
+                };
+            }
+        }
+    ])
+    .then((data) => {
+        const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+        team.push(manager);
+        addTeamMember();
+    })
+}
+
+function addTeamMember() {
+    inquirer
+    .prompt([
+        {
+            type: 'list',
+            name: 'role',
+            choices: ['Add an engineer', 'Add an intern', 'Finish building the team']
         }
     ])
 }
